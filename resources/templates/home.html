@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+{% if connected? %}
+<div>
+    <p> Bine ati venit! Serverul SuperCollider este conectat. </p>
+</div>
+{% else %}
+<div>
+    <p> Pentru a utiliza aplicatia trebuie sa aveti instalat SuperCollider sau sa va conectati la un calculator pe care este instalat si ruleaza. Pentru download si informatii: <a href="http://supercollider.github.io/">SuperCollider</a></p>
+</div>
+<form method="GET" action="/connect">
+    <label> Introduceti IP-ul si portul pe care ruleaza serverul SuperCollider: </label><input type="text" class="form-control" name="SC IP">
+  <input type="submit" value="Conecteaza Supercollider">
+</form>
+{% endif %}
+<!--<div class="row">
+  <div class="col-sm-12">
+    {{docs|markdown}}
+  </div>
+</div>-->
+{% endblock %}

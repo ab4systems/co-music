@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <form method="GET" action="/music/canta">
+            <label>Nota: </label><input type="text" class="form-control" name="note">
+            <input type="submit" class="btn btn-primary" value="Canta!">
+        </form>
+        <form method="GET" action="/music/stop">
+            <input type="submit" class="btn btn-primary" value="AOLEU GATA">
+        </form>
+    </div>
+</div>
+</br>
+<div class="row">
+    <div class="span12">
+<form method="POST" action="/music">
+    {% csrf-field %}
+    <p>Adauga harmonic block: </p> <!-- mai fac aici dropdown cu note si tipuri de acorduri care sa se adauge in textbox -->
+    <label>Acorduri (ex. C4 E4 G4; F4 A4 C5; G4 B4 D5): </label><input class="form-control" type="text" name="harmblock_block" value="{{harmblock_block}}">
+    <input type="submit" class="btn btn-primary" value="Adauga">
+</form>
+    </div>
+</div>
+</br>
+<div class="row">
+    <div class="span12">
+<form method="POST" action="/music">
+    {% csrf-field %}
+    <p>Adauga abstract rhythm block: (dupa modelul: [0 3 4])</p>
+    <label>Acorduri: </label><input type="text" class="form-control" name="acorduri">
+    <input type="submit" class="btn btn-primary" value="Adauga">
+</form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <!--{% if harmblocks|not-empty %}-->
+        {% for hb in harmblocks %}
+        <p>{{hb.harmblock_id}}</p>
+        <p>{{hb.harmblock_block}}</p>
+        {% endfor %}
+        <!--{% else %}
+        <p> de ce nu merge </p>
+        <p> tot n-avem </p>
+        {% endif %}-->
+    </div>
+</div>
+{% endblock %}

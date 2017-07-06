@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <p>{{db-error}}</p>
+        <table class="table table-hover">
+            {% for hb in harmblocks %}
+            <tr>
+                <td>{{hb.harmblock_block}}</td>
+                <td> <form method="POST" id="form1" action="/harmonicblocks/delete/{{hb.harmblock_id}}"> {% csrf-field %} <button  type="submit" class="btn btn-danger">Delete</button></form></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!--{% if harmblocks|not-empty %}-->
+        <!--{% else %}
+        <p> de ce nu merge </p>
+        <p> tot n-avem </p>
+        {% endif %}-->
+    </div>
+</div>
+</br>
+<div class="row">
+    <div class="span12">
+        <form method="POST" action="/harmonicblocks">
+            {% csrf-field %}
+            <p>Adauga harmonic block: </p> <!-- mai fac aici dropdown cu note si tipuri de acorduri care sa se adauge in textbox -->
+            <label>Acorduri (ex. C4 E4 G4; F4 A4 C5; G4 B4 D5): </label><input class="form-control" type="text" name="harmblock_block" value="{{harmblock_block}}">
+            </br>
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+</div>
+</br>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+<!--<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            {% for tr in song %}
+            <tr>
+                <td> Track 1</td>
+                {% for mb in tr %}
+                <td>{{mb}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>-->
+</br>
+</br>
+<div class="row">
+    <h2>Song Operations</h2>
+    <form id="play-song" method="POST" action="song/playsong">
+        {% csrf-field %}
+        <button type="submit" class="btn btn-link">
+            <i class="fa fa-play-circle fa-4x" aria-hidden="true"></i>
+        </button>
+    </form>
+    <form id="stop-song" method="POST" action="song/stopsong">
+        {% csrf-field %}
+        <button type="submit" class="btn btn-link">
+            <i class="fa fa-stop-circle fa-4x" aria-hidden="true"></i>
+        </button>
+    </form>
+    <form id="change-bpm" method="POST" action="song/changebpm">
+        {% csrf-field %}
+        <label>Change bpm: </label><input type="text" name="bpm">
+        <input type="submit" class="btn btn-primary" value="Modify">
+    </form>
+    <form id="erase-song" method="POST" action="song/erasesong">
+        {% csrf-field %}
+        <input type="submit" class="btn btn-danger" value="Erase Song">
+    </form>
+</div>
+</br>
+</br>
+<div class="row">
+    <h2>Track Operations</h2>
+    <h4>- Add to Track</h4>
+    <form id="add-to-track-form" method="POST" action="song/addtotrack">
+        {% csrf-field %}
+        <label>Track number: </label><input type="text" name="trackno">
+        <label>Position in track: </label><input type="text" name="trackpos">
+        <input type="submit" class="btn btn-primary" value="Add to Track">
+    </form>
+</div>
+</br>
+</br>
+<div class="row">
+    <h2>Music Blocks</h2>
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            {% for mb in musicblocks %}
+            <tr>
+                <td>{{mb.musicblock_block}}</td>
+                <td>
+                    <form method="POST" id="play-mb-form" action="/song/play/{{mb.harmblock_id}}/{{mb.absrhythmblock_id}}">{% csrf-field %}
+                        <button type="submit" class="btn btn-link">
+                            <i class="fa fa-play-circle fa-2x" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </td>
+                <!--<td>
+                    <form method="POST" id="stop-mb-form" action="/song/stop/{{mb.musicblock_id}}/{{mb.absrhythmblock_id}}">{% csrf-field %}
+                        <button type="submit" class="btn btn-link">
+                            <i class="fa fa-stop-circle fa-2x" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </td>-->
+                <td>
+                    <input type="radio" form="add-track-form" name="musicblockid" value="{{mb.harmblock_id}} {{mb.absrhythmblock_id}}" >
+                </td>
+                <td>
+                    <input type="radio" form="add-to-track-form" name="musicblockid" value="{{mb.harmblock_id}} {{mb.absrhythmblock_id}}" >
+                </td>
+                <td>
+                    <form method="POST" id="delete-mb-form" action="/song/delete/{{mb.harmblock_id}}/{{mb.absrhythmblock_id}}"> {% csrf-field %}
+                        <button  type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form id="add-track-form" method="POST" action="song/addtrack">
+        {% csrf-field %}
+        <input type="submit" class="btn btn-primary" value="Add Track">
+    </form>
+</div>
+</br>
+</br>
+{% endblock %}

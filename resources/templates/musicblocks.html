@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2> Harmonic Blocks </h2>
+        <table class="table table-hover">
+            {% if harmblocks%}
+            {% for hb in harmblocks %}
+            <tr>
+                <td>{{hb.harmblock_block}}</td>
+                <td><input id="mihai" type="radio" form="addmusicblock" name="mihai" value="{{hb.harmblock_id}}" ></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <p>  </p>
+            {% endif %}
+        </table>
+    </div>
+    <div class="col-sm-12">
+        <h2> Rhythm Blocks </h2>
+        <table class="table table-hover">
+            {% for arb in absrhythmblocks %}
+            <tr>
+                <td>{{arb.absrhythmblock_block}}</td>
+                <td><input id="irina" type="radio" form="addmusicblock" name="irina" value="{{arb.absrhythmblock_id}}"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</br>
+<div class="row">
+    <div class="span12">
+        <form id="addmusicblock" method="POST" action='/musicblocks/add'>
+            {% csrf-field %}
+            <p>Adauga music block: </p>
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+</div>
+</br>
+
+
+{% endblock %}

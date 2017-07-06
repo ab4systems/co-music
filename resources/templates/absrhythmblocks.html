@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            {% for arb in absrhythmblocks %}
+            <tr>
+                <td>{{arb.absrhythmblock_block}}</td>
+                <td> <form method="POST" id="form1" action="/abstractrhythmblocks/delete/{{arb.absrhythmblock_id}}"> {% csrf-field %} <button  type="submit" class="btn btn-danger">Delete</button></form></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</br>
+<div class="row">
+    <div class="span12">
+        <form method="POST" action="/abstractrhythmblocks">
+            {% csrf-field %}
+            <p>Adauga abstract rhythm block: </p>
+            <input class="form-control" type="text" name="absrhythmblock_block" value="{{absrhythmblock_block}}">
+            </br>
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+</div>
+</br>
+{% endblock %}
