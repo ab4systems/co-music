@@ -1,7 +1,7 @@
 (defproject comusic "0.1.0-SNAPSHOT"
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Comusic - aplicatie web pentru compozitie muzicala dezvoltata in Clojure"
+  :url ""
 
   :dependencies [[buddy "1.3.0"]
                  [compojure "1.5.2"]
